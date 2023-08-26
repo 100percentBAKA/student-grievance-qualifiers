@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./auth/auth_style.css" />
+    <link rel="stylesheet" href="style.css">
+    <script defer src="./auth/auth_script.js"></script>
+  </head>
+  <body>
+    <section class="auth">
+      <div class="auth-ctn">
+        <div class="ctn-left">
+            <div class="btn-ctn">
+                <button class="std-login-btn">Student Login</button>
+                <button class="tch-login-btn">Faculty Login</button>
+                <button class="signup-btn">Sign Up</button>
+            </div>
+        </div>
+        <div class="ctn-right">
+          <!-- Login container -->
+          <div class="login hidden">
+            <h2>Login</h2>
+            <form>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Username"
+                required
+              />
+
+              <input
+                type="password"
+                id="login-password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+
+              <button type="submit">Login</button>
+            </form>
+          </div> 
+
+          <!-- Sign up section -->
+          <div class="signup">
+            <h2>Signup</h2>
+            <form>
+              <input type="email" id="email" name="email" placeholder="E-mail" required>
+              
+              <input type="password" id="password" name="password" placeholder="Password" required>
+              
+              <input type="password" id="retype-password" name="retype-password" placeholder="Retype Password" required>
+    
+              <div class="name-ctn">
+                <input type="text" id="first-name" name="first-name" placeholder="First name" required>
+              
+    
+                <input type="text" id="last-name" name="last-name" placeholder="Last name" required>
+              </div>
+              
+              <div class="checkboxes">
+                <label>
+                  <input type="checkbox" name="agree-terms" required id="checkbox-text">
+                  I agree to the <a href="#">Terms and Conditions</a>
+                </label>
+                <label>
+                  <input type="checkbox" name="receive-newsletter">
+                  Receive newsletter
+                </label>
+              </div>
+              
+              <button type="submit">Signup</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

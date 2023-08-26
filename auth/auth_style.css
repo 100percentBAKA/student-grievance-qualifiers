@@ -1,0 +1,131 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.auth-ctn {
+  height: 60%;
+  width: 60%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.auth-ctn .ctn-left {
+  background-color: blue;
+  border-radius: 1.2rem 0 0 1.2rem;
+}
+
+.ctn-left .btn-ctn {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 2rem;
+}
+
+.btn-ctn > button {
+  font-size: 1.2vw;
+  width: 65%;
+  padding: 1rem 2rem;
+  border-radius: 10rem;
+}
+
+.auth-ctn .ctn-right {
+  background-color: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 1.2rem 1.2rem 0;
+
+  transition: all 300ms;
+}
+
+.login,
+.signup {
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  width: 60%;
+  height: 60%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.2rem;
+}
+
+.login form,
+.signup form {
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  row-gap: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.login h2,
+.signup h2 {
+  font-size: 4rem;
+}
+
+.login form > input,
+.signup form > input,
+.name-ctn input {
+  padding: 2rem;
+  border-radius: 0.6rem;
+  border: none;
+  background-color: #555;
+  font-weight: 500;
+  width: 100%;
+}
+
+.login form > input::placeholder,
+.signup form > input::placeholder,
+.name-ctn > input::placeholder {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.login form > button,
+.signup form > button {
+  width: 30%;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: 500;
+  border-radius: 0.6rem;
+  border: none;
+}
+
+.signup {
+  width: 90%;
+  height: 90%;
+  border-radius: 1.2rem;
+}
+
+.name-ctn,
+.checkboxes {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 2rem;
+}
+
+.checkboxes {
+  flex-direction: column;
+  row-gap: 1.2rem;
+  align-items: flex-start;
+  font-size: 1.4rem;
+  letter-spacing: -0.75px;
+}
+
+.hidden {
+  opacity: 0;
+  display: none;
+  pointer-events: none;
+}
