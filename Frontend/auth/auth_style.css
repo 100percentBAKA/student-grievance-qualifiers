@@ -168,8 +168,51 @@ form > input:-webkit-autofill:focus,
   margin-right: 1.8vh;
 }
 
-
 .hidden {
   display: none;
   pointer-events: none;
+}
+
+/* OTP  */
+
+.otp-ctn {
+  height: 80%;
+  width: 80%;
+  background-color: yellow;
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 4vh;
+}
+
+.otp-ctn .otp-title {
+  font-size: 4vh;
+  font-weight: 600;
+}
+
+.otp-ctn form {
+  margin-top: 2vh;
+}
+
+.otp-ctn form > input {
+  display: inline-block;
+  height: 5vh;
+  width: 5vh;
+  margin-right: 1.2vw;
+}
+
+.otp-ctn > button {
+  width: 30%;
+  padding: 1.5vh 2vw;
+  font-size: 2.4vh;
+  font-weight: 500;
+  border-radius: 0.6em;
+  border: none;
+}
+
+.otp-ctn form > .otp {
+  font-size: 2vh;
+  text-align: center;
 }

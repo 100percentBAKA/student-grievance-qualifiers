@@ -26,14 +26,16 @@
               <input
                 type="text"
                 id="username"
+                class="login-username"
                 name="username"
-                placeholder="Username"
+                placeholder="Email"
                 required
               />
 
               <input
                 type="password"
                 id="login-password"
+                class="login-password"
                 name="password"
                 placeholder="Password"
                 required
@@ -41,13 +43,16 @@
 
               <div class="login-ctn">
                 <label>
-                  <input type="checkbox" name="remember me" id="remember-chk-bx"><span>Remember me</span>
+                  <input
+                    type="checkbox"
+                    name="remember me"
+                    id="remember-chk-bx"
+                  /><span>Remember me</span>
                 </label>
-                  <a href="#">Forget?</a>
+                <a href="#">Forget?</a>
               </div>
 
-
-              <button type="submit">Login</button>
+              <button class="login-btn">Login</button>
             </form>
           </div>
 
@@ -58,6 +63,7 @@
               <input
                 type="email"
                 id="email"
+                class="signup-email"
                 name="email"
                 placeholder="E-mail"
                 required
@@ -65,6 +71,7 @@
               <input
                 type="password"
                 id="password"
+                class="signup-password"
                 name="password"
                 placeholder="Password"
                 required
@@ -72,6 +79,7 @@
               <input
                 type="password"
                 id="retype-password"
+                class="retype-password"
                 name="retype-password"
                 placeholder="Retype Password"
                 required
@@ -81,6 +89,7 @@
                 <input
                   type="text"
                   id="first-name"
+                  class="first-name"
                   name="first-name"
                   placeholder="First name"
                   required
@@ -88,6 +97,7 @@
                 <input
                   type="text"
                   id="last-name"
+                  class="last-name"
                   name="last-name"
                   placeholder="Last name"
                   required
@@ -110,8 +120,21 @@
                 </label>
               </div>
 
-              <button type="submit">Signup</button>
+              <button type="submit" class="submit-btn">Signup</button>
             </form>
+          </div>
+
+          <!-- OTP container  -->
+          <div class="otp-ctn hidden">
+            <div class="otp-title">Verify OTP</div>
+            <form action="" class="mt-5">
+              <input class="otp" type="text" maxlength="1" />
+              <input class="otp" type="text" maxlength="1" />
+              <input class="otp" type="text" maxlength="1" />
+              <input class="otp" type="text" maxlength="1" />
+              <input class="otp" type="text" maxlength="1" />
+            </form>
+            <button class="otp-verify-btn">Verify</button>
           </div>
         </div>
       </div>
