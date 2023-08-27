@@ -93,7 +93,28 @@
   background-color: #555;
   font-weight: 500;
   width: 100%;
-  font-size: 1.8vh;
+  height: 6vh;
+  font-size: 2vh;
+}
+
+form > input:-webkit-autofill,
+form > input:-webkit-autofill:focus,
+.name-ctn > input:-webkit-autofill:focus,
+.name-ctn > input:-webkit-autofill {
+  -webkit-text-fill-color: black;
+  -webkit-box-shadow: 0 0 0 2em #555 inset;
+}
+
+form > input:-webkit-autofill:focus,
+.name-ctn > input:-webkit-autofill:focus {
+  border: 2px solid black;
+}
+
+.login form > input::placeholder,
+.signup form > input::placeholder,
+.name-ctn > input::placeholder {
+  font-size: 2vh;
+  font-weight: 500;
 }
 
 .login form > input::placeholder,
@@ -119,15 +140,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  column-gap: 1vh;
+  column-gap: 0.7vw;
 }
 
 .checkboxes {
   flex-direction: column;
-  row-gap: 1vw;
   align-items: flex-start;
   font-size: 2vh;
   letter-spacing: -0.75px;
+  margin-top: 1vh;
+  row-gap: 0.8vh;
 }
 
 .hidden {
