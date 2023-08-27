@@ -4,7 +4,12 @@ const signupBtn = document.querySelector('.signup-btn');
 const loginCtn = document.querySelector('.login');
 const signupCtn = document.querySelector('.signup');
 
+const h2Element = document.querySelector('.login h2');
+
 stdLoginBtn.addEventListener('click', () => {
+
+    h2Element.textContent = 'Login (Student)';
+
     if (loginCtn.classList.contains('hidden')) {
         signupCtn.classList.add('hidden');
         loginCtn.classList.remove('hidden');
@@ -12,6 +17,9 @@ stdLoginBtn.addEventListener('click', () => {
 });
 
 tchLoginBtn.addEventListener('click', () => {
+
+    h2Element.textContent = 'Login (Faculty)';
+
     if (loginCtn.classList.contains('hidden')) {
         signupCtn.classList.add('hidden');
         loginCtn.classList.remove('hidden');
