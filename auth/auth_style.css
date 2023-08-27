@@ -76,12 +76,11 @@
   align-items: center;
   justify-content: center;
   row-gap: 0.9vh;
-  width: 90%;
+  width: 80%;
 }
 
 .login form {
   row-gap: 1.8vh;
-  width: 80%;
 }
 
 .login > form > input,
@@ -151,6 +150,24 @@ form > input:-webkit-autofill:focus,
   margin-top: 1vh;
   row-gap: 0.8vh;
 }
+
+.login-ctn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 2vw;
+  font-size: 1.8vh;
+}
+
+.login-ctn span {
+  margin-left: 0.5em;
+}
+
+.login-ctn a {
+  margin-right: 1.8vh;
+}
+
 
 .hidden {
   display: none;
