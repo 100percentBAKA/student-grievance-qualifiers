@@ -1,0 +1,83 @@
+/* student_style.css */
+/* Reset styles */
+body,
+div,
+h1,
+h2,
+p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Rest of your CSS code */
+:root {
+  --header-height: 5vh;
+  --sidebar-width: 12vw;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px  */
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+.header {
+  background-color: yellow;
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.header .sticky {
+  background-color: #fff;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* -----> Main container */
+.main-ctn {
+  position: relative;
+  top: var(--header-height);
+
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* ---> Sticky sidebar */
+.sidebar {
+  background-color: green;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--header-height));
+  position: fixed;
+  top: var(--header-height);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+main {
+  height: calc(100vh - var(--header-height));
+  width: calc(100vw - var(--sidebar-width) - 20vw);
+  position: relative;
+  /* top: var(--header-height); */
+  left: var(--sidebar-width);
+  background-color: aqua;
+}
+
+.box {
+  width: 50vw;
+  height: 50vh;
+  background-color: #000;
+  margin-top: 5vh;
+}

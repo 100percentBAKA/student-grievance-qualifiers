@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const regexEmail = /^1RN(19|20|21|22)(CS|IS|AI|DS|EE|EC|CI|ME)(00[1-9]|0[1-9]\d|1\d{2}|2[0-1]\d|220)\.\w+@GMAIL\.COM$/;
         const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-        if(emailValue == "" || passwordValue == "" || retypePasswordValue == "" || firstNameValue == "" || lastNameValue == "") {
+        if (emailValue == "" || passwordValue == "" || retypePasswordValue == "" || firstNameValue == "" || lastNameValue == "") {
             alert('Please enter all input fields');
             return;
         }
@@ -59,17 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Please enter a valid college email address.');
             return;
         }
-        if(!regexPassword.test(passwordValue)) {
-            alert('Passord must contain:' + '\n' +
-            'a minimum of 8 characters' + '\n' +
-            'one lowercase' + '\n' +
-            'one uppercase' + '\n' +
-            'one digit' + '\n' +
-            'one special character - @$!%*?&'
+        if (!regexPassword.test(passwordValue)) {
+            alert('Password must contain:' + '\n' +
+                'a minimum of 8 characters' + '\n' +
+                'one lowercase' + '\n' +
+                'one uppercase' + '\n' +
+                'one digit' + '\n' +
+                'one special character - @$!%*?&'
             );
             return;
         }
-        if(passwordValue != retypePasswordValue) {
+        if (passwordValue != retypePasswordValue) {
             alert('Passwords are not matching');
             return;
         }
