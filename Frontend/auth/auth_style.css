@@ -131,6 +131,7 @@ form > input:-webkit-autofill:focus,
   font-weight: 500;
   border-radius: 0.6em;
   border: none;
+  cursor: pointer;
 }
 
 .name-ctn,

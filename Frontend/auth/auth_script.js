@@ -47,8 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstNameValue = firstName.value;
         const lastNameValue = lastName.value;
 
-        if (!emailValue.includes('@')) {
-            alert('Email must contain the "@" symbol.');
+        // Regex for college email verification
+        const regexEmail = /^1[rR][nN]19|20|21|22[aA-zZ]{2}\d{3}\.\w+@gmail\.com$/i;
+        if (!regexEmail.test(emailValue)) {
+            alert('Please enter a valid college email address.');
             return;
         }
         if (!termsCheckbox.checked) {
@@ -61,6 +63,43 @@ document.addEventListener('DOMContentLoaded', () => {
             otpContainer.classList.remove('hidden');
         }, 500);
     });
+
+    // Elements related to OTP
+    const otpInputs = document.querySelectorAll('.otp');
+    const otpVerifyBtn = document.querySelector('.otp-verify-btn');
+
+    let counter = 1;
+    otpInputs.forEach((input, index) => {
+        input.addEventListener('input', (event) => {
+            const inputValue = event.target.value;
+            if (inputValue.length === 1) {
+                if (index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                } else {
+                    otpVerifyBtn.focus();
+                }
+                counter++;
+            }
+        });
+
+        input.addEventListener('keydown', (event) => {
+            if (event.key === 'Backspace' && input.value === '' && index > 0) {
+                otpInputs[index - 1].focus();
+                counter--;
+            }
+        });
+    });
+
+    otpVerifyBtn.addEventListener('click', () => {
+        if (counter !== otpInputs.length) {
+            alert("Please fill all the fields.");
+        }
+
+        const otpValue = Array.from(otpInputs).map(input => input.value).join('');
+        // OTP verification Logic goes here ....
+        console.log('Entered OTP: ', otpValue);
+    });
+
 
     // Elements related to Login Form
     const loginBtn = document.querySelector('.login-btn');
@@ -77,8 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const isValid = checkCredentialsValidity(usernameValue, passwordValue);
 
         if (isValid) {
+            // redirect to the main page
             console.log('Credentials are valid. Proceed to next steps.');
         } else {
+            // allow user to re enter credentials
             console.log('Invalid credentials. Please check your username and password.');
         }
     });
