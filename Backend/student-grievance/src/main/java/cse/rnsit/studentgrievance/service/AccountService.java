@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public class AccountService {
 
+    @SuppressWarnings("unused")
     @Autowired
     private AccountRepository accountRepository;
 
@@ -23,8 +24,12 @@ public class AccountService {
         return accountRepository.findByEmail(email);
     }
 
-    public Optional<Long> getIdByEmail(String email) {
-        return accountRepository.findIdByEmail(email);
+    public Long isEmailAvailable(String email) {
+        return accountRepository.isEmailAvailable(email);
+    }
+
+    public Optional<String> getPasswordByEmail(String email) {
+        return accountRepository.findPasswordByEmail(email);
     }
 
     public Optional<Boolean> isAdmin(String email) {

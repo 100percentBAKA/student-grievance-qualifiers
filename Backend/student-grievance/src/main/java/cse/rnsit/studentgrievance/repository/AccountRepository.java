@@ -10,13 +10,16 @@ import java.util.Optional;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    public Optional<Account> findByEmail(String email);
+    Optional<Account> findByEmail(String email);
 
-    @Query("SELECT a.id FROM Account a WHERE a.email =:email")
-    public Optional<Long> findIdByEmail(@Param("email") String email);
+    @Query("SELECT COUNT(*) FROM Account a WHERE a.email =:email ")
+    long isEmailAvailable(@Param("email") String email);
 
-    @Query("SELECT a.is_admin FROM Account a WHERE a.email = :email")
-    public Optional<Boolean> findIsAdminByEmail(@Param("email") String email);
+    @Query("SELECT a.is_admin FROM Account a WHERE a.email =:email")
+    Optional<Boolean> findIsAdminByEmail(@Param("email") String email);
 
-    public void deleteByEmail(String email);
+    @Query("SELECT a.password FROM Account a WHERE a.email =:email")
+    Optional<String> findPasswordByEmail(@Param("email") String email);
+
+    void deleteByEmail(String email);
 }

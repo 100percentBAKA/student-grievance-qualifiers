@@ -32,13 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const firstName = document.querySelector('.first-name');
     const lastName = document.querySelector('.last-name');
     const signupEmail = document.querySelector('.signup-email');
-    const submitBtn = document.querySelector('.submit-btn');
     const signupContainer = document.querySelector('.signup');
     const otpContainer = document.querySelector('.otp-ctn');
     const termsCheckbox = document.querySelector('[name="agree-terms"]');
+    const signupForm = document.getElementById('signup-form')
 
     // Event listener for signup form submission
-    submitBtn.addEventListener('click', (event) => {
+    signupForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
         const emailValue = signupEmail.value;
@@ -47,11 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstNameValue = firstName.value;
         const lastNameValue = lastName.value;
 
-        // Regex for college email verification
+        // Regex for college email and password verification
         const regexEmail = /^1RN(19|20|21|22)(CS|IS|AI|DS|EE|EC|CI|ME)(00[1-9]|0[1-9]\d|1\d{2}|2[0-1]\d|220)\.\w+@GMAIL\.COM$/;
         const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-        if (emailValue == "" || passwordValue == "" || retypePasswordValue == "" || firstNameValue == "" || lastNameValue == "") {
+        // validating signup form
+        if(emailValue == "" || passwordValue == "" || retypePasswordValue == "" || firstNameValue == "" || lastNameValue == "") {
             alert('Please enter all input fields');
             return;
         }
@@ -59,17 +60,17 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Please enter a valid college email address.');
             return;
         }
-        if (!regexPassword.test(passwordValue)) {
-            alert('Password must contain:' + '\n' +
-                'a minimum of 8 characters' + '\n' +
-                'one lowercase' + '\n' +
-                'one uppercase' + '\n' +
-                'one digit' + '\n' +
-                'one special character - @$!%*?&'
+        if(!regexPassword.test(passwordValue)) {
+            alert('Passord must contain:' + '\n' +
+            'a minimum of 8 characters' + '\n' +
+            'one lowercase' + '\n' +
+            'one uppercase' + '\n' +
+            'one digit' + '\n' +
+            'one special character - @$!%*?&'
             );
             return;
         }
-        if (passwordValue != retypePasswordValue) {
+        if(passwordValue != retypePasswordValue) {
             alert('Passwords are not matching');
             return;
         }
@@ -77,77 +78,117 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Please agree to the Terms and Conditions.');
             return;
         }
-
-        setTimeout(() => {
-            signupContainer.classList.add('hidden');
-            otpContainer.classList.remove('hidden');
-        }, 500);
-    });
-
-    // Elements related to OTP
-    const otpInputs = document.querySelectorAll('.otp');
-    const otpVerifyBtn = document.querySelector('.otp-verify-btn');
-
-    let counter = 1;
-    otpInputs.forEach((input, index) => {
-        input.addEventListener('input', (event) => {
-            const inputValue = event.target.value;
-            if (inputValue.length === 1) {
-                if (index < otpInputs.length - 1) {
-                    otpInputs[index + 1].focus();
-                } else {
-                    otpVerifyBtn.focus();
-                }
-                counter++;
+        
+        // check if email is already used
+        fetch("http://localhost:2000/api/user/check/" + emailValue, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
             }
-        });
-
-        input.addEventListener('keydown', (event) => {
-            if (event.key === 'Backspace' && input.value === '' && index > 0) {
-                otpInputs[index - 1].focus();
-                counter--;
-            }
+        })
+        .then(function(res) {
+            if(res.status === 200) {
+                res.json().then(function(result) {
+                    if(result) {
+                        setTimeout(() => {
+                            signupContainer.classList.add('hidden');
+                            otpContainer.classList.remove('hidden');
+                        }, 500);
+        
+                        // Elements related to OTP
+                        const otpInputs = document.querySelectorAll('.otp');
+                        const otpVerifyBtn = document.querySelector('.otp-verify-btn');
+                    
+                        otpInputs.forEach((input, index) => {
+                            input.addEventListener('input', (event) => {
+                                const inputValue = event.target.value;
+                                if (inputValue.length === 1) {
+                                    if (index < otpInputs.length - 1) otpInputs[index + 1].focus();
+                                    else otpVerifyBtn.focus();
+                                }
+                            });
+                    
+                            input.addEventListener('keydown', (event) => {
+                                if (event.key === 'Backspace' && input.value === '' && index > 0) {
+                                    otpInputs[index - 1].focus();
+                                }
+                            });
+                        });
+        
+                        otpVerifyBtn.addEventListener('click', () => {
+                            const otpValue = Array.from(otpInputs).map(input => input.value).join('');
+                            if (otpValue.length !== otpInputs.length) alert("Please fill all the fields.");
+                            else {
+                                // OTP verification Logic goes here....
+                                console.log('Entered OTP: ', otpValue);
+        
+                                // if success register user
+                                fetch("http://localhost:2000/api/user/register", {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        email: emailValue,
+                                        password: passwordValue,
+                                        first_name: firstNameValue,
+                                        last_name: lastNameValue,
+                                        is_admin: false
+                                    })
+                                })
+                                .then(function(res) {
+                                    if(res.status == 200) {
+                                        alert('Email registered');
+                                        setTimeout(() => {
+                                            window.location.href = "../dashboard/student/student.html"
+                                        },
+                                        500);
+                                    } else alert('internal server error');
+                                });
+                            }
+                        });
+                    } else alert('Email already registered');
+                })
+            } else if(res.status === 500) alert("Internal server error");
         });
     });
-
-    otpVerifyBtn.addEventListener('click', () => {
-        if (counter !== otpInputs.length) {
-            alert("Please fill all the fields.");
-        }
-
-        const otpValue = Array.from(otpInputs).map(input => input.value).join('');
-        // OTP verification Logic goes here ....
-        console.log('Entered OTP: ', otpValue);
-    });
-
 
     // Elements related to Login Form
-    const loginBtn = document.querySelector('.login-btn');
+    const loginForm = document.getElementById('login-form');
     const loginUsername = document.querySelector('.login-username');
     const loginPassword = document.querySelector('.login-password');
 
-    loginBtn.addEventListener('click', (event) => {
+    loginForm.addEventListener('submit', (event) => {
         event.preventDefault(); // Prevent the default form submission behavior
 
         const usernameValue = loginUsername.value;
         const passwordValue = loginPassword.value;
 
-        // Function checks the validity of password and username
-        const isValid = checkCredentialsValidity(usernameValue, passwordValue);
-
-        if (isValid) {
-            // redirect to the main page
-            console.log('Credentials are valid. Proceed to next steps.');
-        } else {
-            // allow user to re enter credentials
-            console.log('Invalid credentials. Please check your username and password.');
-        }
+        fetch("http://localhost:2000/api/user/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: usernameValue,
+                password: passwordValue
+            })
+        })
+        .then(function(res) {
+            if(res.status === 200) {
+                res.json().then(function(result) {
+                    if(result) {
+                        alert("login successful");
+                        setTimeout(() => {
+                            window.location.href = "../dashboard/student/student.html"
+                        },
+                        500);
+                    } else alert("Invalid credentials");
+                });
+            } else if(res.status === 400) alert("Email not registered");
+            else alert("Internal server error");
+        })
     });
-
-
-    function checkCredentialsValidity(username, password) {
-        return false;
-    }
 
     // Function to toggle login and signup containers
     function toggleLoginSignup(show, hide) {

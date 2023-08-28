@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 @RestController
 @RequestMapping("/api/user")
 public class AccountController {
@@ -16,11 +18,55 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @PostMapping("/save")
+    @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody Account account) {
         try {
             accountService.save(account);
-            return ResponseEntity.ok("registration successful");
+            return ResponseEntity.ok(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getMessage());
+            return ResponseEntity.internalServerError().body("some error");
+        }
+    }
+
+    @GetMapping("/check/{email}")
+    public ResponseEntity<Object> isEmailAvailable(@PathVariable String email) {
+        try {
+            return new ResponseEntity<>(
+                    accountService.isEmailAvailable(email) == 0,
+                    HttpStatus.OK
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getMessage());
+            return ResponseEntity.internalServerError().body("some error");
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Object> validateCredentials(@RequestBody Map<String, String> map) {
+        try {
+            Optional<String> passwordOptional = accountService.getPasswordByEmail(map.get("email"));
+            if(passwordOptional.isPresent()) {
+                if(passwordOptional.get().equals(map.get("password")))
+                    return new ResponseEntity<>(true, HttpStatus.OK);
+                else return new ResponseEntity<>(false, HttpStatus.OK);
+            } else return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getMessage());
+            return ResponseEntity.internalServerError().body("some error");
+        }
+    }
+
+    @GetMapping("/role/{email}")
+    public ResponseEntity<Object> isAdmin(@PathVariable String email) {
+        try {
+            Optional<Boolean> roleOptional = accountService.isAdmin(email);
+            return roleOptional.<ResponseEntity<Object>>map(
+                            role -> new  ResponseEntity<>(role, HttpStatus.OK))
+                    .orElseGet(() -> ResponseEntity.badRequest().body(false));
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
@@ -34,40 +80,12 @@ public class AccountController {
             Optional<Account> accountOptional = accountService.getByEmail(email);
             return accountOptional.<ResponseEntity<Object>>map(
                     account -> new ResponseEntity<>(account, HttpStatus.OK))
-                    .orElseGet(() -> ResponseEntity.badRequest().body("Invalid email")
+                    .orElseGet(() -> ResponseEntity.badRequest().body(false)
                     );
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
-            return ResponseEntity.badRequest().body("some error");
-        }
-    }
-
-    @GetMapping("/id/{email}")
-    public ResponseEntity<Object> getIdByEmail(@PathVariable String email) {
-        try {
-            Optional<Long> idOptional = accountService.getIdByEmail(email);
-            return idOptional.<ResponseEntity<Object>>map(
-                    id -> new ResponseEntity<>(id, HttpStatus.OK))
-                    .orElseGet(() -> ResponseEntity.badRequest().body("Invalid email"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getMessage());
-            return ResponseEntity.badRequest().body("some error");
-        }
-    }
-
-    @GetMapping("/role/{email}")
-    public ResponseEntity<Object> getRole(@PathVariable String email) {
-        try {
-            Optional<Boolean> roleOptional = accountService.isAdmin(email);
-            return roleOptional.<ResponseEntity<Object>>map(
-                    role -> new  ResponseEntity<>(role, HttpStatus.OK))
-                    .orElseGet(() -> ResponseEntity.badRequest().body("Invalid email"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getMessage());
-            return ResponseEntity.badRequest().body("some error");
+            return ResponseEntity.internalServerError().body("some error");
         }
     }
 
@@ -75,7 +93,7 @@ public class AccountController {
     public ResponseEntity<Object> deleteByEmail(@PathVariable String email) {
         try {
             accountService.deleteByEmail(email);
-            return ResponseEntity.ok("Delete Successful");
+            return ResponseEntity.ok(true);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
