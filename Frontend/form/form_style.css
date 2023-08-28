@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+:root {
+  --header-height: 5vh;
+  --sidebar-width: 10vw;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* -----> Header section  */
+/* ---> Sticky nav bar  */
+
+.header {
+  background-color: yellow;
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+}
+
+.header .logo-ctn {
+  width: 20%;
+  font-size: 3rem;
+  font-weight: 600;
+
+  display: flex;
+  justify-content: center;
+}
+
+.header .logo-ctn .header-logo {
+  margin-left: 10vw;
+  padding: 0 0.7vw;
+  cursor: pointer;
+  /* box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px; */
+}
+
+.header .search-bar-ctn {
+  width: 52.8%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header .bx-search {
+  position: absolute;
+  left: 5.6vw;
+}
+
+.search-bar-ctn > input {
+  width: 80%;
+  padding: 1rem;
+  font-size: 2vh;
+  text-indent: 2vw;
+  border-radius: 10rem;
+}
+
+.header .icon-main-ctn {
+  padding-left: 5vw;
+  display: flex;
+  column-gap: 1vw;
+}
+
+.icon-ctn {
+  padding: 5px;
+  cursor: pointer;
+  /* box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px; */
+}
+
+/* -----> Form section  */
+.form-area {
+  position: relative;
+  top: calc(var(--header-height));
+  display: flex;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.form-area-left {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 7vh;
+}
+
+.form-area .form-area-right {
+  width: 30%;
+}
+
+.form-area-left > h1 {
+  font-size: 3vh;
+  margin-top: 5vh;
+}
+
+.form-box > h1 {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.77);
+  font-size: 2.6rem;
+  margin-bottom: 2vh;
+}
+
+ul {
+  list-style-type: none;
+}
+
+/* ---> form box section  */
+
+.form-box {
+  padding: 2vh 2.5vw;
+  font-size: 1.8vh;
+  background-color: rgba(143, 211, 254, 0.3);
+  border: 1px solid rgb(143, 211, 254);
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+
+.form-box > p {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.form-box > span {
+  font-size: 1.3rem;
+}
+
+.form-box > input {
+  padding: 1vh 1vw;
+  border: 1px solid #000;
+  border-radius: 1rem;
+  margin-bottom: 5px;
+}
+
+.form-box > button {
+  width: 3vw;
+  padding: 0.8vh 0.5vw;
+  border-radius: 0.6rem;
+}
+
+.form-box > textarea {
+  padding: 1vh 1vw;
+  border: 1px solid #000;
+  border-radius: 1rem;
+  margin-bottom: 5px;
+}

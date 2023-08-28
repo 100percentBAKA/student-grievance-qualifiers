@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grievance Form</title>
+    <link rel="stylesheet" href="./form_style.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Section for sticky header  -->
+    <header class="header" id="myHeader">
+      <div class="logo-ctn"><span class="header-logo">LOGO</span></div>
+      <div class="search-bar-ctn">
+        <i class="bx bx-search bx-lg"></i>
+        <input type="text" />
+      </div>
+      <div class="icon-main-ctn">
+        <div class="icon-ctn">
+          <i class="bx bx-user bx-lg"></i>
+        </div>
+        <div class="icon-ctn">
+          <i class="bx bx-chat bx-lg"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- Form section  -->
+    <section class="form-area">
+      <div class="form-area-left">
+        <!-- writing good grievance section  -->
+        <h1 class="form-title">Raise a Grievance</h1>
+        <!-- Writing good Grievance  -->
+        <div class="form-box writing-good">
+          <h1>Writing a good grievance</h1>
+          <ul>
+            <li>Clearly state the issue in a brief and specific manner.</li>
+            <li>
+              Provide important information like course name, date, and names of
+              involved parties.
+            </li>
+            <li>Stick to the facts and avoid emotional language.</li>
+            <li>
+              Clearly state what you're hoping to achieve as a resolution.
+            </li>
+            <li>Add “tags” which help surface your question.</li>
+            <li>Review your question and post it to the site.</li>
+          </ul>
+        </div>
+
+        <!-- title of the grievance  -->
+        <div class="form-box title-gre">
+          <p>Title</p>
+          <span
+            >Be specific and imagine you’re telling this to another
+            person.</span
+          >
+          <input
+            type="text"
+            placeholder="e.g. I want to raise a grievance about . . ."
+            required
+          />
+          <button class="title-gre-next">Next</button>
+        </div>
+
+        <!-- select tag section  -->
+        <div class="form-box title-gre">
+          <p>Title</p>
+          <span
+            >Be specific and imagine you’re telling this to another
+            person.</span
+          >
+          <input
+            type="text"
+            placeholder="e.g. I want to raise a grievance about . . ."
+            required
+          />
+          <button class="title-gre-next">Next</button>
+        </div>
+
+        <!-- grievance detail  -->
+        <div class="form-box form-gre-detail">
+          <p>What are the details of your grievance</p>
+          <span
+            >Introduce the grievance and expand on what you put in the title.
+            Minimum 20 characters.</span
+          >
+          <textarea
+            class="textarea-gre-detail"
+            name="feedback"
+            rows="8"
+            cols="50"
+            placeholder="Enter the detail"
+          ></textarea>
+          <button class="title-gre-next">Next</button>
+        </div>
+
+        <!-- form image section  -->
+        <div class="form-box"></div>
+      </div>
+
+      <!-- form area right section  -->
+      <div class="form-area-right"></div>
+    </section>
+  </body>
+</html>

@@ -5,20 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grievance Dashboard</title>
     <link rel="stylesheet" href="./student_style.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <script defer src="./student_script.js"></script>
   </head>
   <body>
     <!-- Section for sticky header  -->
-    <header class="header" id="myHeader"></header>
+    <header class="header" id="myHeader">
+      <div class="logo-ctn"><span class="header-logo">LOGO</span></div>
+      <div class="search-bar-ctn">
+        <i class="bx bx-search bx-lg"></i>
+        <input type="text" />
+      </div>
+      <div class="icon-main-ctn">
+        <div class="icon-ctn">
+          <i class="bx bx-user bx-lg"></i>
+        </div>
+        <div class="icon-ctn">
+          <i class="bx bx-chat bx-lg"></i>
+        </div>
+      </div>
+    </header>
 
     <!-- Main container  -->
     <div class="primary-ctn">
       <!-- Section for sticky sidebar  -->
-      <aside class="sidebar" id="mySidebar"></aside>
+      <aside class="sidebar" id="mySidebar">
+        <div class="sidebar-ctn">
+          <span>Home</span>
+          <span>Settings</span>
+          <span>About</span>
+        </div>
+      </aside>
 
       <!-- Main section  -->
       <main>
-        <div class="left-ctn"></div>
+        <div class="left-ctn">
+          <div class="left-ctn-head">
+            <div class="left-ctn-ctn-head">
+              <span>Previously raised grievances</span>
+              <a href="/Frontend/form/form.html">
+                <button>Raise grievance</button>
+              </a>
+            </div>
+            <!-- this container includes four commonly raised grievance tag  -->
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+          </div>
+          <hr />
+        </div>
         <div class="right-ctn"></div>
       </main>
     </div>
