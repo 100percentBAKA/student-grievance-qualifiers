@@ -22,7 +22,7 @@ public class AccountController {
     public ResponseEntity<Object> registerUser(@RequestBody Account account) {
         try {
             accountService.save(account);
-            return ResponseEntity.ok(true);
+            return ResponseEntity.ok(HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getMessage());

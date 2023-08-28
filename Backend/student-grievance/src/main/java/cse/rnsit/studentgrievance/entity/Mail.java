@@ -9,17 +9,11 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "account")
-public class Account {
+@Table(name = "email")
+public class Mail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    private String first_name;
-    private String last_name;
-    private boolean is_admin;
-
-    @Column(unique = true)
+    private String otp;
     private String email;
-    private String password;
 }

@@ -93,3 +93,19 @@ export function getAccount(emailValue) {
         return "Internal server error";
     })
 }
+
+
+// Mail api
+function sendOtp(email) {
+    fetch("http://localhost:2000/api/mail/" + email, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(function(res) {
+        if(res.status == 200) return 1;
+        else return 0;
+    });
+}
+
