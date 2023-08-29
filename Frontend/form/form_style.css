@@ -90,20 +90,15 @@ body {
 .form-area {
   position: relative;
   top: calc(var(--header-height));
-  display: flex;
   width: 70%;
   margin: 0 auto;
 }
 
 .form-area-left {
-  width: 70%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 7vh;
-}
-
-.form-area .form-area-right {
-  width: 30%;
 }
 
 .form-area-left > h1 {
@@ -111,18 +106,13 @@ body {
   margin-top: 5vh;
 }
 
+/* ---> form box section  */
 .form-box > h1 {
   font-weight: 500;
   color: rgba(0, 0, 0, 0.77);
   font-size: 2.6rem;
   margin-bottom: 2vh;
 }
-
-ul {
-  list-style-type: none;
-}
-
-/* ---> form box section  */
 
 .form-box {
   padding: 2vh 2.5vw;
@@ -151,6 +141,8 @@ ul {
 }
 
 .form-box > button {
+  font-size: 1.2rem;
+  font-weight: 500;
   width: 3vw;
   padding: 0.8vh 0.5vw;
   border-radius: 0.6rem;
@@ -161,4 +153,54 @@ ul {
   border: 1px solid #000;
   border-radius: 1rem;
   margin-bottom: 5px;
+}
+
+.form-box > select {
+  padding: 1vh 1vw;
+  border: 1px solid #000;
+  border-radius: 1rem;
+  margin-bottom: 5px;
+}
+
+.form-box .final-gre-submit-btn {
+  margin-top: 8px;
+  width: 4vw;
+  background-color: rgb(143, 211, 254);
+
+  transition: box-shadow 300ms;
+}
+
+.form-box .final-gre-submit-btn:hover {
+  box-shadow: 1.2px 1.2px 0 black;
+}
+
+.form-box-last {
+  margin-bottom: 2vh;
+}
+
+/* Form area right section  */
+.summary-bx {
+  height: 60%;
+  width: 90%;
+  background: rgba(143, 211, 254, 0.3);
+}
+
+/* -> Media queries  */
+
+@media (max-width: 1500px) {
+  .form-box > button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .form-box > button {
+    font-size: 0.8rem;
+  }
+}
+
+/* -> others  */
+.grayed {
+  background-color: #555;
+  pointer-events: none;
 }

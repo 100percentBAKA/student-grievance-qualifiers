@@ -12,6 +12,7 @@ public class StudentGrievanceApplication {
 		SpringApplication.run(StudentGrievanceApplication.class, args);
 	}
 
+	@SuppressWarnings("unused")
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {

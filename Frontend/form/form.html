@@ -9,6 +9,7 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+    <script src="/Frontend/form/form_script.js"></script>
   </head>
   <body>
     <!-- Section for sticky header  -->
@@ -59,26 +60,29 @@
             person.</span
           >
           <input
+            class="title-gre-input"
             type="text"
             placeholder="e.g. I want to raise a grievance about . . ."
             required
           />
-          <button class="title-gre-next">Next</button>
+          <button class="title-gre-next-btn">Next</button>
         </div>
 
         <!-- select tag section  -->
-        <div class="form-box title-gre">
-          <p>Title</p>
-          <span
-            >Be specific and imagine you’re telling this to another
-            person.</span
-          >
-          <input
-            type="text"
-            placeholder="e.g. I want to raise a grievance about . . ."
-            required
-          />
-          <button class="title-gre-next">Next</button>
+        <div class="form-box tag-gre">
+          <p>Tags</p>
+          <span>Select suitable tags.</span>
+          <select class="gre-selector">
+            <option value="faculty">Faculty and Staff Conduct</option>
+            <option value="administrative">Administrative Issues</option>
+            <option value="financial">Financial Matters</option>
+            <option value="infrastructure">Infrastructure</option>
+            <option value="disciplinary">Disciplinary Actions</option>
+            <option value="accommodation">Housing and Accommodation</option>
+            <option value="communication">Communication and Information</option>
+            <option value="inclusion">Diversity and Inclusion</option>
+          </select>
+          <button class="tag-drop-next">Next</button>
         </div>
 
         <!-- grievance detail  -->
@@ -89,21 +93,26 @@
             Minimum 20 characters.</span
           >
           <textarea
-            class="textarea-gre-detail"
+            class="gre-detail"
             name="feedback"
             rows="8"
             cols="50"
             placeholder="Enter the detail"
           ></textarea>
-          <button class="title-gre-next">Next</button>
+          <button class="gre-detail-next">Next</button>
         </div>
 
         <!-- form image section  -->
-        <div class="form-box"></div>
+        <div class="form-box attach-img form-box-last">
+          <p>Attach few snapshots is possible</p>
+          <span
+            >Attach suitable images which conveys your grievance. Make sure that
+            images are < 2MB
+          </span>
+          <input type="file" id="fileUpload" name="uploadedFile" />
+          <button class="final-gre-submit-btn">Submit</button>
+        </div>
       </div>
-
-      <!-- form area right section  -->
-      <div class="form-area-right"></div>
     </section>
   </body>
 </html>

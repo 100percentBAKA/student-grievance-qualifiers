@@ -11,21 +11,17 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "account")
-public class Account {
+@Table(name = "category")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String first_name;
-    private String last_name;
-    private boolean is_admin;
-
     @Column(unique = true)
-    private String email;
+    private String category_name;
 
-    private String password;
+    private int popularity;
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private List<Grievance> grievances;
 }

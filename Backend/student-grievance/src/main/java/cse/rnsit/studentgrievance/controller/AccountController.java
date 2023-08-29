@@ -78,10 +78,13 @@ public class AccountController {
     public ResponseEntity<Object> getAccount(@PathVariable String email) {
         try {
             Optional<Account> accountOptional = accountService.getByEmail(email);
-            return accountOptional.<ResponseEntity<Object>>map(
-                    account -> new ResponseEntity<>(account, HttpStatus.OK))
-                    .orElseGet(() -> ResponseEntity.badRequest().body(false)
-                    );
+            if(accountOptional.isPresent()) {
+                Account account = new Account();
+                account.setEmail(accountOptional.get().getEmail());
+                account.setFirst_name(accountOptional.get().getFirst_name());
+                account.setLast_name(accountOptional.get().getLast_name());
+                return new ResponseEntity<>(account, HttpStatus.OK);
+            } else return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getMessage());

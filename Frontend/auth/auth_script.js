@@ -1,3 +1,22 @@
+// set cookie
+function setCookie(name, value, daysToLive) {
+    const date = new Date();
+    date.setTime(date.getTime() +  (daysToLive * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + date.toUTCString();
+    document.cookie = `${name}=${value}; ${expires}; path=/;`;
+}
+
+// get cookie
+function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (match) return match[2];
+    else return null;
+}
+
+if(getCookie("email") != null) {
+    window.location.href = "./dashboard/student/student.html";
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Elements related to switching between login and signup and otp
     const stdLoginBtn = document.querySelector('.std-login-btn');
@@ -51,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstNameValue = firstName.value;
         const lastNameValue = lastName.value;
 
+
         // Regex for college email and password verification
         const regexEmail = /^1RN(19|20|21|22)(CS|IS|AI|DS|EE|EC|CI|ME)(00[1-9]|0[1-9]\d|1\d{2}|2[0-1]\d|220)\.\w+@GMAIL\.COM$/;
         const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -64,16 +84,16 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Please enter a valid college email address.');
             return;
         }
-        // if(!regexPassword.test(passwordValue)) {
-        //     alert('Password must contain:' + '\n' +
-        //     'a minimum of 8 characters' + '\n' +
-        //     'one lowercase' + '\n' +
-        //     'one uppercase' + '\n' +
-        //     'one digit' + '\n' +
-        //     'one special character - @$!%*?&'
-        //     );
-        //     return;
-        // }
+        if(!regexPassword.test(passwordValue)) {
+            alert('Password must contain:' + '\n' +
+            'a minimum of 8 characters' + '\n' +
+            'one lowercase' + '\n' +
+            'one uppercase' + '\n' +
+            'one digit' + '\n' +
+            'one special character - @$!%*?&'
+            );
+            return;
+        }
         if (passwordValue != retypePasswordValue) {
             alert('Passwords are not matching');
             return;
@@ -83,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-
         // check if email is already used
         fetch("http://localhost:2000/api/user/check/" + emailValue, {
             method: 'GET',
@@ -91,165 +110,96 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Content-Type': 'application/json'
             }
         })
-
-            .then(function (res) {
-                if (res.status == 200) {
-                    res.json().then(function (result) {
-                        if (result) {
-                            fetch("http://localhost:2000/api/mail/" + emailValue, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                }
-                            })
-                                .then(function (res) {
-                                    if (res.status == 200) {
-                                        signupContainer.classList.add('hidden');
-                                        otpContainer.classList.remove('hidden');
-
-                                        otpInputs.forEach((input, index) => {
-                                            input.addEventListener('input', (event) => {
-                                                const inputValue = event.target.value;
-                                                if (inputValue.length == 1) {
-                                                    if (index < otpInputs.length - 1) otpInputs[index + 1].focus();
-                                                    else otpVerifyBtn.focus();
-                                                }
-                                            });
-
-                                            input.addEventListener('keydown', (event) => {
-                                                if (event.key === 'Backspace' && input.value === '' && index > 0) {
-                                                    otpInputs[index - 1].focus();
-                                                }
-                                            });
-                                        });
-
-                                        otpVerifyBtn.addEventListener('click', () => {
-                                            const otpValue = Array.from(otpInputs).map(input => input.value).join('');
-                                            if (otpValue.length !== otpInputs.length) alert("Please fill all the fields.");
-                                            else {
-                                                fetch("http://localhost:2000/api/mail/" + emailValue, {
-                                                    method: 'GET',
-                                                    headers: {
-                                                        'Content-Type': 'application/json'
-                                                    }
-                                                })
-                                                    .then(function (res) {
-                                                        if (res.status == 200) {
-                                                            res.json().then(function (result) {
-                                                                console.log(result.otp + " " + otpValue);
-                                                                if (result.otp == otpValue) {
-                                                                    fetch("http://localhost:2000/api/mail/" + emailValue, {
-                                                                        method: 'DELETE',
-                                                                        headers: {
-                                                                            'Content-Type': 'application/json'
-                                                                        }
-                                                                    })
-
-                                                                    fetch("http://localhost:2000/api/user/register", {
-                                                                        method: 'POST',
-                                                                        headers: {
-                                                                            'Content-Type': 'application/json'
-                                                                        },
-                                                                        body: JSON.stringify({
-                                                                            email: emailValue,
-                                                                            password: passwordValue,
-                                                                            first_name: firstNameValue,
-                                                                            last_name: lastNameValue,
-                                                                            is_admin: false
-                                                                        })
-                                                                    })
-                                                                        .then(function (res) {
-                                                                            if (res.status == 200) {
-                                                                                alert('Email registered');
-                                                                                setTimeout(() => {
-                                                                                    window.location.href = "../dashboard/student/student.html"
-                                                                                }, 500);
-                                                                            }
-                                                                            else return "internal server error";
-                                                                        });
-                                                                } else alert("Invalid otp")
-                                                            });
-                                                        }
-                                                        else alert("OTP Expired");
-                                                    });
-                                            }
-                                        });
-                                    }
-                                    else alert("Invalid email address");
-                                });
-                        }
-                        else alert("Email already registered");
-                    });
-                }
-                return "Internal server error";
-            })
-
-            .then(function (res) {
-                if (res.status === 200) {
-                    res.json().then(function (result) {
-                        if (result) {
-                            setTimeout(() => {
+        .then(function (res) {
+            if (res.status == 200) {
+                res.json().then(function (result) {
+                    if (result) {
+                        fetch("http://localhost:2000/api/mail/" + emailValue, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(function (res) {
+                            if (res.status == 200) {
+                                console.log(passwordValue);
                                 signupContainer.classList.add('hidden');
                                 otpContainer.classList.remove('hidden');
-                            }, 500);
 
-                            // Elements related to OTP
-                            const otpInputs = document.querySelectorAll('.otp');
-                            const otpVerifyBtn = document.querySelector('.otp-verify-btn');
+                                otpInputs.forEach((input, index) => {
+                                    input.addEventListener('input', (event) => {
+                                        const inputValue = event.target.value;
+                                        if (inputValue.length == 1) {
+                                            if (index < otpInputs.length - 1) otpInputs[index + 1].focus();
+                                            else otpVerifyBtn.focus();
+                                        }
+                                    });
 
-                            otpInputs.forEach((input, index) => {
-                                input.addEventListener('input', (event) => {
-                                    const inputValue = event.target.value;
-                                    if (inputValue.length === 1) {
-                                        if (index < otpInputs.length - 1) otpInputs[index + 1].focus();
-                                        else otpVerifyBtn.focus();
-                                    }
+                                    input.addEventListener('keydown', (event) => {
+                                        if (event.key === 'Backspace' && input.value === '' && index > 0) {
+                                            otpInputs[index - 1].focus();
+                                        }
+                                    });
                                 });
 
-                                input.addEventListener('keydown', (event) => {
-                                    if (event.key === 'Backspace' && input.value === '' && index > 0) {
-                                        otpInputs[index - 1].focus();
-                                    }
-                                });
-                            });
-
-                            otpVerifyBtn.addEventListener('click', () => {
-                                const otpValue = Array.from(otpInputs).map(input => input.value).join('');
-                                if (otpValue.length !== otpInputs.length) alert("Please fill all the fields.");
-                                else {
-                                    // OTP verification Logic goes here....
-                                    console.log('Entered OTP: ', otpValue);
-
-                                    // if success register user
-                                    fetch("http://localhost:2000/api/user/register", {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json'
-                                        },
-                                        body: JSON.stringify({
-                                            email: emailValue,
-                                            password: passwordValue,
-                                            first_name: firstNameValue,
-                                            last_name: lastNameValue,
-                                            is_admin: false
+                                otpVerifyBtn.addEventListener('click', () => {
+                                    const otpValue = Array.from(otpInputs).map(input => input.value).join('');
+                                    if (otpValue.length !== otpInputs.length) alert("Please fill all the fields.");
+                                    else {
+                                        fetch("http://localhost:2000/api/mail/" + emailValue, {
+                                            method: 'GET',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            }
                                         })
-                                    })
                                         .then(function (res) {
                                             if (res.status == 200) {
-                                                alert('Email registered');
-                                                setTimeout(() => {
-                                                    window.location.href = "../dashboard/student/student.html"
-                                                },
-                                                    500);
-                                            } else alert('internal server error');
+                                                res.json().then(function (result) {
+                                                    console.log(result.otp + " " + otpValue);
+                                                    if (result.otp == otpValue) {
+                                                        fetch("http://localhost:2000/api/mail/" + emailValue, {
+                                                            method: 'DELETE',
+                                                            headers: {
+                                                                'Content-Type': 'application/json'
+                                                            }
+                                                        })
+                                                        fetch("http://localhost:2000/api/user/register", {
+                                                            method: 'POST',
+                                                            headers: {
+                                                                'Content-Type': 'application/json'
+                                                            },
+                                                            body: JSON.stringify({
+                                                                email: emailValue,
+                                                                password: passwordValue,
+                                                                first_name: firstNameValue,
+                                                                last_name: lastNameValue,
+                                                                is_admin: false
+                                                            })
+                                                        })
+                                                        .then(function (res) {
+                                                            if (res.status == 200) {
+                                                                alert('Email registered');
+                                                                setTimeout(() => {
+                                                                    setCookie("email", emailValue, 365);
+                                                                    window.location.href = "./dashboard/student/student.html"
+                                                                }, 500);
+                                                            } else return "internal server error";
+                                                        });
+                                                    } else alert("Invalid otp");
+                                                });
+                                            }
+                                            else alert("OTP Expired");
                                         });
-                                }
-                            });
-                        } else alert('Email already registered');
-                    })
-                } else if (res.status === 500) alert("Internal server error");
-            });
-
+                                    }
+                                });
+                            }
+                            else alert("Invalid email address");
+                        });
+                    }
+                    else alert("Email already registered");
+                });
+            } else alert("internal server error");
+        });
     });
 
     // Elements related to Login Form
@@ -273,37 +223,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 password: passwordValue
             })
         })
-
-            .then(function (res) {
-                if (res.status == 200) {
-                    res.json().then(function (result) {
-                        if (result) {
-                            alert("login successful");
-                            setTimeout(() => {
-                                window.location.href = "../dashboard/student/student.html"
-                            },
-                                500);
-                        } else alert("Invalid credentials");
-                    });
-                } else if (res.status === 400) alert("Email not registered");
-                else alert("Internal server error");
-            })
-
-            .then(function (res) {
-                if (res.status === 200) {
-                    res.json().then(function (result) {
-                        if (result) {
-                            alert("login successful");
-                            setTimeout(() => {
-                                window.location.href = "../dashboard/student/student.html"
-                            },
-                                500);
-                        } else alert("Invalid credentials");
-                    });
-                } else if (res.status === 400) alert("Email not registered");
-                else alert("Internal server error");
-            })
-
+        .then(function (res) {
+            if (res.status == 200) {
+                res.json().then(function (result) {
+                    if (result) {
+                        alert("login successful");
+                        setTimeout(() => {
+                            setCookie("email", usernameValue, 365);
+                            window.location.href = "./dashboard/student/student.html"
+                        }, 500);
+                    } else alert("Invalid credentials");
+                });
+            } else if (res.status === 400) alert("Email not registered");
+            else alert("Internal server error");
+        })
+        .then(function (res) {
+            if (res.status === 200) {
+                res.json().then(function (result) {
+                    if (result) {
+                        alert("login successful");
+                        setTimeout(() => {
+                            window.location.href = "../dashboard/student/student.html"
+                        },
+                        500);
+                    } else alert("Invalid credentials");
+                });
+            } else if (res.status === 400) alert("Email not registered");
+            else alert("Internal server error");
+        });
     });
 
     // Function to toggle login and signup containers
