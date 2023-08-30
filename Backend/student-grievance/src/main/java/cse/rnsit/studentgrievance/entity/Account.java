@@ -1,5 +1,6 @@
 package cse.rnsit.studentgrievance.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,7 @@ public class Account {
 
     private String password;
 
+    @JsonIgnoreProperties({"student", "faculty"})
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     private List<Grievance> grievances;
 }

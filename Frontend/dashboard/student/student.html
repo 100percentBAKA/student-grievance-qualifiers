@@ -51,14 +51,62 @@
               </a>
             </div>
             <!-- this container includes four commonly raised grievance tag  -->
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
+            <div class="btn-ctn">
+              <button class="tag-pop-btn"></button>
+              <button class="tag-pop-btn"></button>
+              <button class="tag-pop-btn"></button>
+              <button class="tag-pop-btn"></button>
+            </div>
           </div>
-          <hr />
+
+          <!-- grievance divs goes here  -->
+          <button class="gre-div-check">div</button>
+          <button class="gre-progress-check">progress</button>
         </div>
-        <div class="right-ctn"></div>
+
+        <!-- Grievance tracker section  -->
+        <!-- Various stages of processing grievance: 
+        Submission 
+        Initial Review 
+        Investigation 
+        Resolution 
+        Decision 
+        Communication 
+        Appeal -->
+
+        <div class="right-ctn">
+          <div class="progress-ctn">
+            <div class="progress gre-submit"></div>
+            <span>Grievance Submission</span>
+            <div class="progress gre-review"></div>
+            <span>Initial Review</span>
+            <div class="progress gre-investigation"></div>
+            <span>Investigation</span>
+            <div class="progress gre-resolution"></div>
+            <span>Resolution</span>
+            <div class="progress gre-decision"></div>
+            <span>Decision</span>
+            <div class="progress gre-appeal"></div>
+            <span>Appeal</span>
+          </div>
+        </div>
+
+        <div class="checkbox-ctn">
+          <div class="progress-checkbox">
+            <input type="checkbox" data-progress="gre-submit" />
+            <input type="checkbox" data-progress="gre-review" />
+            <input type="checkbox" data-progress="gre-investigation" />
+            <input type="checkbox" data-progress="gre-resolution" />
+            <input type="checkbox" data-progress="gre-decision" />
+            <input type="checkbox" data-progress="gre-appeal" />
+          </div>
+        </div>
+
+        <!-- User menu drop down part  -->
+        
+
+        <!-- Screen overlay part  -->
+        <div class="screen-overlay hidden"></div>
       </main>
     </div>
   </body>

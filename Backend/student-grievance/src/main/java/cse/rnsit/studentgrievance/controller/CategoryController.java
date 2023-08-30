@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @SuppressWarnings("unused")
 @RestController
@@ -22,7 +23,6 @@ public class CategoryController {
     public ResponseEntity<Object> addCategory(@PathVariable String category_name) {
         Category category = new Category();
         category.setCategory_name(category_name);
-        category.setPopularity(0);
         try {
             categoryService.save(category);
             return new ResponseEntity<>("Added" ,HttpStatus.OK);
@@ -33,8 +33,6 @@ public class CategoryController {
 
     @PostMapping("/add-all/{cat_size}")
     public ResponseEntity<Object> addCategories(@RequestBody List<Category> categories, @PathVariable int cat_size) {
-        for(int index = 0; index < cat_size; index++)
-            categories.get(index).setPopularity(0);
         try {
             categoryService.saveAll(categories);
             return new ResponseEntity<>("Added" ,HttpStatus.OK);
@@ -43,9 +41,22 @@ public class CategoryController {
         }
     }
 
+    @GetMapping("grievances/{category_name}")
+    public ResponseEntity<Object> getGrievances(@PathVariable String category_name) {
+        Optional<Category> categoryOptional = categoryService.findByName(category_name);
+        //noinspection OptionalGetWithoutIsPresent
+        return new ResponseEntity<>(categoryOptional.get().getGrievances(), HttpStatus.OK);
+    }
+
     @GetMapping("/popular")
     public ResponseEntity<Object> getPopularCategories() {
         List<String> categoryNames = categoryService.getCategoryNameByPopularity();
         return new ResponseEntity<>(categoryNames, HttpStatus.OK);
+    }
+
+    @PatchMapping("/increment/{category_name}")
+    public ResponseEntity<Object> updatePopularity(@PathVariable String category_name) {
+        categoryService.updatePopularity(category_name);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

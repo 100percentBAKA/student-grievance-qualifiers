@@ -178,6 +178,9 @@ main .right-ctn {
   height: 15%;
   background: #d3d3d3;
   border-radius: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2vh;
 }
 
 .left-ctn-head .left-ctn-ctn-head {
@@ -208,6 +211,78 @@ main .right-ctn {
   color: #000;
   border: none;
 }
+
+.left-ctn-head > .btn-ctn {
+  margin-left: 3vw;
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 1vw;
+}
+
+.btn-ctn > button {
+  padding: 5px;
+}
+
+/* Grievance tracker section  */
+.right-ctn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.progress-ctn {
+  padding: 5vh 2vw;
+}
+
+.progress {
+  width: 2rem;
+  height: 11.5vh;
+  background-color: #555;
+}
+
+.progress .gre-review {
+  height: 20vh;
+}
+
+.progress-ctn > span {
+  font-size: 1.8rem;
+}
+
+/* others  */
+.hidden {
+  pointer-events: none;
+  opacity: 0;
+  display: none;
+}
+
+.checkbox-ctn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.checkbox-ctn .progress-checkbox {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1vh;
+  padding: 1rem;
+}
+
+.screen-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px) !important;
+}
+
+/* Media queries  */
 
 @media (max-width: 1600px) {
   .sidebar-ctn > span {

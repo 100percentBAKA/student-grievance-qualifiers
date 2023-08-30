@@ -1,10 +1,11 @@
 package cse.rnsit.studentgrievance.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Data
@@ -16,17 +17,21 @@ import java.util.List;
 @Table(name = "grievance")
 public class Grievance {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String title;
     private String description;
     private int status;
+    private Date date;
+    private Time time;
 
+    @Column(columnDefinition = "INTEGER DEFAULT 0")
+    private int popularity;
+
+    @JsonIgnoreProperties({"grievances"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id")
-    @JsonIgnore
     private Account student;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -37,6 +42,7 @@ public class Grievance {
     )
     private List<Account> faculty;
 
+    @JsonIgnoreProperties({"grievances"})
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "grievance_category",
