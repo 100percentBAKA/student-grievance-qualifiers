@@ -80,6 +80,7 @@ public class AccountController {
             Optional<Account> accountOptional = accountService.getByEmail(email);
             if(accountOptional.isPresent()) {
                 Account account = new Account();
+                account.setId(accountOptional.get().getId());
                 account.setEmail(accountOptional.get().getEmail());
                 account.setFirst_name(accountOptional.get().getFirst_name());
                 account.setLast_name(accountOptional.get().getLast_name());

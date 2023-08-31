@@ -251,6 +251,31 @@ main .right-ctn {
   font-size: 1.8rem;
 }
 
+.drop-down-wrapper {
+  width: 22vw;
+  height: 44vh;
+  background-color: #555;
+  background-color: rgba(85, 85, 85);
+  backdrop-filter: blur(3px);
+  border-radius: 0.6rem;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.drop-down-wrapper .drop-down {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  row-gap: 1vh;
+}
+
 /* others  */
 .hidden {
   pointer-events: none;
@@ -277,9 +302,26 @@ main .right-ctn {
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 998;
 
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px) !important;
+}
+
+/* Profile css */
+.drop-down-name {
+  font-weight: 800;
+  font-size: 1.5em;
+}
+
+.drop-down > hr {
+  margin-bottom: 1rem;
+}
+
+.menu-email {
+  font-weight: 700;
+  font-size: 1.1em;
+  margin-left: 0.8em;
 }
 
 /* Media queries  */

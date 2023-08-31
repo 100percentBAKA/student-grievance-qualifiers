@@ -14,9 +14,6 @@ fetch("http://localhost:2000/api/grievance/add/", {
         "faculty": [
             {
                 "id": 2
-            },
-            {
-                "id": 3
             }
         ],
         "categories": [
@@ -49,7 +46,6 @@ fetch("http://localhost:2000/api/grievance/" + grievance_id, {
     } else if(response.status === 400) alert("Grievance not found, might have deleted by user");
     else alert('Server error');
 });
-
 
 // get all grievances of a student
 fetch("http://localhost:2000/api/grievance/student/" + student_email, {

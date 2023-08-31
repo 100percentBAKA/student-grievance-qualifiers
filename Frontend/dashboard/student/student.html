@@ -9,7 +9,7 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <script defer src="./student_script.js"></script>
+    <script src="./student_script.js" async></script>
   </head>
   <body>
     <!-- Section for sticky header  -->
@@ -75,7 +75,7 @@
         Appeal -->
 
         <div class="right-ctn">
-          <div class="progress-ctn">
+          <div class="progress-ctn hidden">
             <div class="progress gre-submit"></div>
             <span>Grievance Submission</span>
             <div class="progress gre-review"></div>
@@ -91,7 +91,7 @@
           </div>
         </div>
 
-        <div class="checkbox-ctn">
+        <div class="checkbox-ctn hidden">
           <div class="progress-checkbox">
             <input type="checkbox" data-progress="gre-submit" />
             <input type="checkbox" data-progress="gre-review" />
@@ -103,6 +103,14 @@
         </div>
 
         <!-- User menu drop down part  -->
+        <div class="drop-down-wrapper hidden">
+          <div class="drop-down">
+            <span class="drop-down-name"></span>
+            <hr>
+            <span class="menu-email"></span>
+            <hr>
+          </div>
+        </div>
         
 
         <!-- Screen overlay part  -->

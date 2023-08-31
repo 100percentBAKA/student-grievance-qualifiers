@@ -18,43 +18,48 @@ function deleteCookie(name) {
     setCookie(name, null, null);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (getCookie("email") == null) {
-        window.location.href = "../../";
-    } else {
-        fetch("http://localhost:2000/api/user/" + getCookie("email"), {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(function (res) {
-                if (res.status == 200) {
-                    res.json().then(function (result) {
-                        console.log(result);
-                        setCookie("firstname", result.first_name, 365);
-                        setCookie("lastname", result.last_name, 365);
-                    });
-                } else {
-                    deleteCookie("email");
-                    deleteCookie("firstname");
-                    deleteCookie("lastname");
-                    window.location.href = "../../";
-                }
-            });
-    }
+function logout() {
+    deleteCookie("email");
+    deleteCookie("firstname");
+    deleteCookie("lastname");
+    deleteCookie("id");
+    window.location.href = "../../";
+}
 
+if (getCookie("email") == null) logout();
+else {
+    fetch("http://localhost:2000/api/user/" + getCookie("email"), {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(function (res) {
+        if (res.status == 200) {
+            res.json().then(function (result) {
+                setCookie("firstname", result.first_name, 365);
+                setCookie("lastname", result.last_name, 365);
+                setCookie("id", result.id, 365);
+            });
+        } else logout();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {    
+    const popularity = [];
     fetch("http://localhost:2000/api/category/top", {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         }
     })
-        .then(function (res) {
-
-        });
-
-    const popularity = ["Academics", "Finance", "Timetable", "Ragging"];
+    .then(function (res) {
+        if(res.status === 200) {
+            res.json().then(function(data) {
+                popularity = data;
+            });
+        }
+    });
 
     // Elements related to tracker btns
     const checkBtn = document.querySelector('.gre-div-check');
@@ -101,4 +106,59 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     );
+
+    // Elements related to drop down menu
+    const dropDownCtn = document.querySelector('.drop-down-wrapper');
+    const name = document.querySelector('.drop-down-name');
+    const menuEmail = document.querySelector('.menu-email');
+
+    // Profile btn element 
+    const profileBtn = document.querySelector('.icon-ctn');
+
+    // Overlay element
+    const overlay = document.querySelector('.screen-overlay');
+
+    profileBtn.addEventListener(
+        'click', () => {
+            dropDownCtn.classList.toggle('hidden');
+        }
+    );
+
+    // getting profile with cookies 
+    name.textContent = getCookie('firstname') + '  ' + getCookie('lastname');
+    menuEmail.textContent = "Email: " + getCookie('email');
+
+    // Handling of drop down menu, profile btn
+
+        // Left container element of student.html
+        const leftContainer = document.querySelector('.left-ctn');
+
+        // Function to create Dynamic elements in student.html
+        function createDynamicContainer(title, tag, detail) {
+            const dynamicDiv = document.createElement('div');
+            dynamicDiv.className = 'dynamic-content gre-div-check';
+    
+            const dynamicDivCtn = document.createElement('div');
+            dynamicDivCtn.className = 'dynamic-content-ctn';
+    
+            const titleTagContentDiv = document.createElement('div');
+            titleTagContentDiv.className = 'title-tag-content';
+    
+            const titleContent = document.createElement('h3');
+            titleContent.textContent = title;
+            const tagContent = document.createElement('p');
+            tagContent.textContent = tag;
+    
+            titleTagContentDiv.appendChild(titleContent);
+            titleTagContentDiv.appendChild(tagContent);
+    
+            const pElement = document.createElement('p');
+            pElement.textContent = detail;
+    
+            dynamicDiv.appendChild(dynamicDivCtn);
+            dynamicDivCtn.appendChild(titleTagContentDiv);
+            dynamicDivCtn.appendChild(pElement);
+    
+            leftContainer.appendChild(dynamicDiv);
+        }
 });

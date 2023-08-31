@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tagNextBtn = document.querySelector(".tag-drop-next");
     const detailNextBtn = document.querySelector(".gre-detail-next");
     const finalSubmitBtn = document.querySelector('.final-gre-submit-btn');
+    const grievanceForm = document.getElementById("")
 
 
     // Variables to store the inputs from the form
