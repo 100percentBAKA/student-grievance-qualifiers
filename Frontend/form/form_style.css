@@ -23,67 +23,57 @@ body {
 /* ---> Sticky nav bar  */
 
 .header {
-  background-color: yellow;
+  background-image: linear-gradient(135deg, #ffd700, #ffff00);
   height: var(--header-height);
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #333;
+}
+
+.logo-ctn {
   display: flex;
   align-items: center;
 }
 
-.header .logo-ctn {
-  width: 20%;
-  font-size: 3rem;
+.logo-ctn > span {
+  font-size: 3vh;
   font-weight: 600;
-
-  display: flex;
-  justify-content: center;
-}
-
-.header .logo-ctn .header-logo {
-  margin-left: 10vw;
-  padding: 0 0.7vw;
-  cursor: pointer;
-  /* box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-    border-radius: 5px; */
 }
 
 .header .search-bar-ctn {
-  width: 52.8%;
-  position: relative;
+  width: 65%;
+  height: 70%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.header .bx-search {
-  position: absolute;
-  left: 5.6vw;
-}
-
 .search-bar-ctn > input {
-  width: 80%;
-  padding: 1rem;
-  font-size: 2vh;
-  text-indent: 2vw;
-  border-radius: 10rem;
+  width: 70%;
+  height: 100%;
+  border-radius: 10px;
 }
 
-.header .icon-main-ctn {
-  padding-left: 5vw;
+.search-bar-ctn > i {
+  position: absolute;
+  left: 27.8%;
+}
+
+.search-bar-ctn > input::placeholder {
+  text-indent: 2vw;
+  font-size: 1.6vh;
+}
+
+.icon-main-ctn {
   display: flex;
   column-gap: 1vw;
-}
-
-.icon-ctn {
-  padding: 5px;
   cursor: pointer;
-  /* box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-    border-radius: 5px; */
 }
 
 /* -----> Form section  */
@@ -107,14 +97,15 @@ body {
 }
 
 /* ---> form box section  */
-.form-box > h1 {
+form > label {
   font-weight: 500;
   color: rgba(0, 0, 0, 0.77);
   font-size: 2.6rem;
   margin-bottom: 2vh;
 }
 
-.form-box {
+form, 
+.writing-good {
   padding: 2vh 2.5vw;
   font-size: 1.8vh;
   background-color: rgba(143, 211, 254, 0.3);
@@ -124,23 +115,18 @@ body {
   row-gap: 4px;
 }
 
-.form-box > p {
-  font-size: 2rem;
-  font-weight: 600;
-}
-
-.form-box > span {
+form > span {
   font-size: 1.3rem;
 }
 
-.form-box > input {
+form > input {
   padding: 1vh 1vw;
   border: 1px solid #000;
   border-radius: 1rem;
   margin-bottom: 5px;
 }
 
-.form-box > button {
+form > button {
   font-size: 1.2rem;
   font-weight: 500;
   width: 3vw;
@@ -148,21 +134,21 @@ body {
   border-radius: 0.6rem;
 }
 
-.form-box > textarea {
+form > textarea {
   padding: 1vh 1vw;
   border: 1px solid #000;
   border-radius: 1rem;
   margin-bottom: 5px;
 }
 
-.form-box > select {
+form > select {
   padding: 1vh 1vw;
   border: 1px solid #000;
   border-radius: 1rem;
   margin-bottom: 5px;
 }
 
-.form-box .final-gre-submit-btn {
+form .final-gre-submit-btn {
   margin-top: 8px;
   width: 4vw;
   background-color: rgb(143, 211, 254);
@@ -170,7 +156,7 @@ body {
   transition: box-shadow 300ms;
 }
 
-.form-box .final-gre-submit-btn:hover {
+form-box .final-gre-submit-btn:hover {
   box-shadow: 1.2px 1.2px 0 black;
 }
 

@@ -4,20 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grievance Dashboard</title>
-    <link rel="stylesheet" href="./student_style.css" />
+    <link rel="stylesheet" href="../student/student_style.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <script src="./student_script.js" async></script>
+    <script src="student_script.js" async></script>
   </head>
   <body>
     <!-- Section for sticky header  -->
     <header class="header" id="myHeader">
       <div class="logo-ctn"><span class="header-logo">LOGO</span></div>
       <div class="search-bar-ctn">
-        <i class="bx bx-search bx-lg"></i>
-        <input type="text" />
+        <i class="bx bx-search bx-md"></i>
+        <input type="text" placeholder="Search Tags ?" />
       </div>
       <div class="icon-main-ctn">
         <div class="icon-ctn">
@@ -29,93 +29,40 @@
       </div>
     </header>
 
-    <!-- Main container  -->
-    <div class="primary-ctn">
-      <!-- Section for sticky sidebar  -->
-      <aside class="sidebar" id="mySidebar">
-        <div class="sidebar-ctn">
-          <span>Home</span>
-          <span>Settings</span>
-          <span>About</span>
+    <div class="work-area">
+      <div class="top-header">
+        <div class="top-top-header">
+          <h1>Previously Raised Grievances</h1>
+          <a href="../../form/form.html">
+            <button class="goto-form-btn">Raise Grievance</button>
+          </a>
         </div>
-      </aside>
-
-      <!-- Main section  -->
-      <main>
-        <div class="left-ctn">
-          <div class="left-ctn-head">
-            <div class="left-ctn-ctn-head">
-              <span>Previously raised grievances</span>
-              <a href="../../form/form.html">
-                <button>Raise grievance</button>
-              </a>
-            </div>
-            <!-- this container includes four commonly raised grievance tag  -->
-            <div class="btn-ctn">
-              <button class="tag-pop-btn"></button>
-              <button class="tag-pop-btn"></button>
-              <button class="tag-pop-btn"></button>
-              <button class="tag-pop-btn"></button>
-            </div>
-          </div>
-
-          <!-- grievance divs goes here  -->
-          <button class="gre-div-check">div</button>
-          <button class="gre-progress-check">progress</button>
-        </div>
-
-        <!-- Grievance tracker section  -->
-        <!-- Various stages of processing grievance: 
-        Submission 
-        Initial Review 
-        Investigation 
-        Resolution 
-        Decision 
-        Communication 
-        Appeal -->
-
-        <div class="right-ctn">
-          <div class="progress-ctn hidden">
-            <div class="progress gre-submit"></div>
-            <span>Grievance Submission</span>
-            <div class="progress gre-review"></div>
-            <span>Initial Review</span>
-            <div class="progress gre-investigation"></div>
-            <span>Investigation</span>
-            <div class="progress gre-resolution"></div>
-            <span>Resolution</span>
-            <div class="progress gre-decision"></div>
-            <span>Decision</span>
-            <div class="progress gre-appeal"></div>
-            <span>Appeal</span>
+        <div class="top-pop-header">
+          <div class="btn-ctn">
+            <button id="1" class="pop-btn">Hello</button>
+            <button id="2" class="pop-btn">Hello</button>
+            <button id="3" class="pop-btn">Hello</button>
+            <button id="4" class="pop-btn">Hello</button>
           </div>
         </div>
-
-        <div class="checkbox-ctn hidden">
-          <div class="progress-checkbox">
-            <input type="checkbox" data-progress="gre-submit" />
-            <input type="checkbox" data-progress="gre-review" />
-            <input type="checkbox" data-progress="gre-investigation" />
-            <input type="checkbox" data-progress="gre-resolution" />
-            <input type="checkbox" data-progress="gre-decision" />
-            <input type="checkbox" data-progress="gre-appeal" />
-          </div>
-        </div>
-
-        <!-- User menu drop down part  -->
-        <div class="drop-down-wrapper hidden">
-          <div class="drop-down">
-            <span class="drop-down-name"></span>
-            <hr>
-            <span class="menu-email"></span>
-            <hr>
-          </div>
-        </div>
-        
-
-        <!-- Screen overlay part  -->
-        <div class="screen-overlay hidden"></div>
-      </main>
+      </div>
     </div>
+
+    <!-- User menu drop down part  -->
+    <div class="drop-down-wrapper hidden">
+      <div class="drop-down">
+        <span class="drop-down-name">Adarsh G S</span>
+        <hr />
+        <span class="drop-down-email">adarshgs@gmail.com</span>
+        <hr />
+        <div class="drop-down-btn-ctn">
+          <button class="edit-profile">Profile</button>
+          <button class="logout-btn">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen overlay part  -->
+    <div class="screen-overlay hidden"></div>
   </body>
 </html>

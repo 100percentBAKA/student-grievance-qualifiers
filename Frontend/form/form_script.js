@@ -17,82 +17,111 @@ function getCookie(name) {
 function deleteCookie(name) {
     setCookie(name, null, null);
 }
-    
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (getCookie("email") == null) {
-        window.location.href = "../../";
-    } else {
-        fetch("http://localhost:2000/api/user/" + getCookie("email"), {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(function (res) {
-            if (res.status == 200) {
-                res.json().then(function (result) {
-                    console.log(result);
-                    setCookie("firstname", result.first_name, 365);
-                    setCookie("lastname", result.last_name, 365);
-                });
-            } else {
-                deleteCookie("email");
-                deleteCookie("firstname");
-                deleteCookie("lastname");
-                window.location.href = "../../";
-            }
-        });
-    }
+    // if (getCookie("email") == null) {
+    //     window.location.href = "../../";
+    // } else {
+    //     fetch("http://localhost:2000/api/user/" + getCookie("email"), {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
+    //     .then(function (res) {
+    //         if (res.status == 200) {
+    //             res.json().then(function (result) {
+    //                 console.log(result);
+    //                 setCookie("firstname", result.first_name, 365);
+    //                 setCookie("lastname", result.last_name, 365);
+    //             });
+    //         } else {
+    //             deleteCookie("email");
+    //             deleteCookie("firstname");
+    //             deleteCookie("lastname");
+    //             window.location.href = "../../";
+    //         }
+    //     });
+    // }
 
     // Elements related to form input
+    const grievanceForm = document.getElementById('grievance-form')
     const greTitle = document.querySelector('.title-gre-input');
     const tagDropdown = document.querySelector(".gre-selector");
     const greDetail = document.querySelector(".gre-detail");
+    const tagList = document.querySelector(".gre-selector");
 
     // Elements related to form next button
     const greTitleNextBtn = document.querySelector('.title-gre-next-btn');
     const tagNextBtn = document.querySelector(".tag-drop-next");
     const detailNextBtn = document.querySelector(".gre-detail-next");
-    const finalSubmitBtn = document.querySelector('.final-gre-submit-btn');
-    const grievanceForm = document.getElementById("")
-
-
-    // Variables to store the inputs from the form
-    // File attach and Image section not implemented
-    let title = '',
-        tag = '',
-        detail = '';
 
     // Handling title next button
     greTitleNextBtn.addEventListener(
         'click', () => {
-            title = greTitle.value;
+            // title = greTitle.value;
         }
     );
 
     // Handling tag next button
     tagNextBtn.addEventListener(
         'click', () => {
-            tag = tagDropdown.value;
+            // tag = tagDropdown.value;
         }
     );
 
     // Handling the description button
     detailNextBtn.addEventListener(
         'click', () => {
-            detail = greDetail.value;
+            // detail = greDetail.value;
         }
     );
 
-    // Handling the final submit button
-    finalSubmitBtn.addEventListener(
-        'click', () => {
-            checkInputField();
-            // ***** Handling the Backend here *****
-        }
-    );
+    grievanceForm.addEventListener('submit', (event) => {
+        event.preventDefault();
 
+        const title = greTitle.value;
+        const tag = tagDropdown.value;
+        const detail = greDetail.value;
+
+        var i = 0;
+        for(i = 0; i < 8; i++) if(tagList[i].text === tag) break;
+        const category_id = i + 1;
+        console.log(title, category_id, detail, getCookie('id'));
+
+        fetch("http://localhost:2000/api/grievance/add", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "title": title,
+                "description": detail,
+                "status": 1,
+                "student": {
+                    "id": getCookie('id')
+                },
+                "faculty": [
+                    {
+                        "id": 1
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": category_id
+                    }
+                ]
+            })
+        })
+        .then(function (response) {
+            if(response.status === 200) {
+                alert('Added');
+                window.location.href = "../dashboard/student/student.html";
+            }
+            else alert('Server error');
+        });
+    });
 
     function checkInputField() {
         // Checking if the title input is left empty

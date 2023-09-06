@@ -17,7 +17,8 @@
 
 .ctn-left {
   flex: 1;
-  background-color: blue;
+  background-color: rgba(52, 152, 219, 0.3);
+  border: 2px solid rgba(52, 152, 219);
   border-radius: 1.2em 0 0 1.2em;
   display: flex;
   justify-content: center;
@@ -45,7 +46,10 @@
 
 .ctn-right {
   flex: 2;
-  background-color: green;
+  background-color: #fff;
+  border-top: 2px solid rgba(52, 152, 219);
+  border-right: 2px solid rgba(52, 152, 219);
+  border-bottom: 2px solid rgba(52, 152, 219);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +61,8 @@
 .signup {
   height: 90%;
   width: 90%;
-  background-color: yellow;
+  background-color: rgba(52, 152, 219, 0.15);
+  border: 2px solid rgba(52, 152, 219);
   border-radius: 1.2em;
   display: flex;
   flex-direction: column;
@@ -132,8 +137,27 @@ form > input:-webkit-autofill:focus,
   font-size: 2vh;
   font-weight: 500;
   border-radius: 0.6em;
-  border: none;
+  border: 2px solid black;
   cursor: pointer;
+}
+
+.show-password-icon,
+.show-password-icon-primary,
+.show-password-icon-secondary {
+  height: 30px;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  right: 26.5%;
+  top: 50.6%;
+}
+
+.show-password-icon-primary {
+  top: 41.6%;
+}
+
+.show-password-icon-secondary {
+  top: 48.7%;
 }
 
 .name-ctn,
@@ -181,7 +205,8 @@ form > input:-webkit-autofill:focus,
 .otp-ctn {
   height: 80%;
   width: 80%;
-  background-color: yellow;
+  background-color: rgba(52, 152, 219, 0.15);
+  border: 2px solid rgba(52, 152, 219);
   border-radius: 0.6rem;
   display: flex;
   flex-direction: column;
@@ -204,6 +229,7 @@ form > input:-webkit-autofill:focus,
   height: 5vh;
   width: 5vh;
   margin-right: 1.2vw;
+  border: 2px solid #000;
 }
 
 .otp-ctn > button {
@@ -212,10 +238,36 @@ form > input:-webkit-autofill:focus,
   font-size: 2.4vh;
   font-weight: 500;
   border-radius: 0.6em;
-  border: none;
+  border: 2px solid #000;
 }
 
 .otp-ctn form > .otp {
   font-size: 2vh;
   text-align: center;
+}
+
+/* loading screen  */
+.loading-screen-top {
+  position: absolute;
+  display: none;
+  top: 0;
+  width: 100%;
+  height: 1vh;
+  background: linear-gradient(to right, #ff6b6b, #6b47ff);
+  background-size: 200% 100%;
+  animation: loading 5s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+
+  50% {
+    width: 50%;
+  }
+
+  100% {
+    width: 100%;
+  }
 }

@@ -16,8 +16,8 @@
     <header class="header" id="myHeader">
       <div class="logo-ctn"><span class="header-logo">LOGO</span></div>
       <div class="search-bar-ctn">
-        <i class="bx bx-search bx-lg"></i>
-        <input type="text" />
+        <i class="bx bx-search bx-md"></i>
+        <input type="text" placeholder="Search Tags ?" />
       </div>
       <div class="icon-main-ctn">
         <div class="icon-ctn">
@@ -29,7 +29,6 @@
       </div>
     </header>
 
-    <!-- Form section  -->
     <section class="form-area">
       <div class="form-area-left">
         <!-- writing good grievance section  -->
@@ -51,67 +50,61 @@
             <li>Review your question and post it to the site.</li>
           </ul>
         </div>
-
-        <!-- title of the grievance  -->
-        <div class="form-box title-gre">
-          <p>Title</p>
-          <span
-            >Be specific and imagine you’re telling this to another
-            person.</span
-          >
+        
+        <!-- title grievance  -->
+        <form id="grievance-form">
+          <label for="title">Title</label>
+          <span>
+            Be specific and imagine you’re telling this to another
+            person.
+          </span>
           <input
             class="title-gre-input"
             type="text"
+            id="title"
             placeholder="e.g. I want to raise a grievance about . . ."
             required
           />
           <button class="title-gre-next-btn">Next</button>
-        </div>
 
-        <!-- select tag section  -->
-        <div class="form-box tag-gre">
-          <p>Tags</p>
-          <span>Select suitable tags.</span>
-          <select class="gre-selector">
-            <option value="faculty">Faculty and Staff Conduct</option>
-            <option value="administrative">Administrative Issues</option>
-            <option value="financial">Financial Matters</option>
-            <option value="infrastructure">Infrastructure</option>
-            <option value="disciplinary">Disciplinary Actions</option>
-            <option value="accommodation">Housing and Accommodation</option>
-            <option value="communication">Communication and Information</option>
-            <option value="inclusion">Diversity and Inclusion</option>
+          <label for="tag">Tags</label>
+          <span>
+            Select suitable tags
+          </span>
+          <select id="tag" class="gre-selector">
+            <option value="Faculty and Staff Conduct">Faculty and Staff Conduct</option>
+            <option value="Administrative Issues">Administrative Issues</option>
+            <option value="Financial Matters">Financial Matters</option>
+            <option value="Infrastructure">Infrastructure</option>
+            <option value="Disciplinary Actions">Disciplinary Actions</option>
+            <option value="Housing and Accommodation">Housing and Accommodation</option>
+            <option value="Communication and Information">Communication and Information</option>
+            <option value="Diversity and Inclusion">Diversity and Inclusion</option>
           </select>
           <button class="tag-drop-next">Next</button>
-        </div>
 
-        <!-- grievance detail  -->
-        <div class="form-box form-gre-detail">
-          <p>What are the details of your grievance</p>
-          <span
-            >Introduce the grievance and expand on what you put in the title.
-            Minimum 20 characters.</span
-          >
+          <label for="detail">Detail</label>
+          <span> 
+            Introduce the grievance and expand on what you put in the title. Minimum 20 characters.
+          </span>
           <textarea
+            id="detail"
             class="gre-detail"
             name="feedback"
             rows="8"
             cols="50"
-            placeholder="Enter the detail"
-          ></textarea>
+            placeholder="Enter the detail">
+          </textarea>
           <button class="gre-detail-next">Next</button>
-        </div>
 
-        <!-- form image section  -->
-        <div class="form-box attach-img form-box-last">
-          <p>Attach few snapshots is possible</p>
-          <span
-            >Attach suitable images which conveys your grievance. Make sure that
-            images are < 2MB
+          <label for="attach-file">File</label>
+          <span>
+            Attach suitable images which conveys your grievance. Make sure that images are &lt; 2MB
           </span>
-          <input type="file" id="fileUpload" name="uploadedFile" />
-          <button class="final-gre-submit-btn">Submit</button>
-        </div>
+          <input id="attach-file" type="file" id="fileUpload" name="uploadedFile" />
+
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </section>
   </body>

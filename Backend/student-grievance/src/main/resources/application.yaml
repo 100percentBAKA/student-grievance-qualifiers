@@ -1,0 +1,29 @@
+server:
+  port: 2000
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/student_grievance
+    username: root
+    password: Mohith@4124
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: this.is.mohith4124@gmail.com
+    password: xlnvzgyfmopdobgz
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

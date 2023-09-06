@@ -16,11 +16,12 @@
             <button class="std-login-btn">Student Login</button>
             <button class="tch-login-btn">Faculty Login</button>
             <button class="signup-btn">Sign Up</button>
+            <button class="loader-check">Check</button>
           </div>
         </div>
         <div class="ctn-right">
           <!-- Login container -->
-          <div class="login hidden">
+          <div class="login">
             <h2>Login</h2>
             <form id="login-form">
               <input
@@ -40,6 +41,12 @@
                 placeholder="Password"
                 required
               />
+              
+              <img
+                src="../Frontend/./resources/./see-password.png"
+                alt="See password Icon"
+                class="show-password-icon"
+              />
 
               <div class="login-ctn">
                 <label>
@@ -57,7 +64,7 @@
           </div>
 
           <!-- Sign up container -->
-          <div class="signup">
+          <div class="signup hidden">
             <h2>Signup</h2>
             <form id="signup-form">
               <input
@@ -76,6 +83,11 @@
                 placeholder="Password"
                 required
               />
+              <img
+                src="../Frontend/./resources/./see-password.png"
+                alt="See password Icon"
+                class="show-password-icon-primary"
+              />
               <input
                 type="password"
                 id="retype-password"
@@ -83,6 +95,11 @@
                 name="retype-password"
                 placeholder="Retype Password"
                 required
+              />
+              <img
+                src="../Frontend/./resources/./see-password.png"
+                alt="See password Icon"
+                class="show-password-icon-secondary"
               />
 
               <div class="name-ctn">
@@ -140,6 +157,6 @@
       </div>
     </section>
 
-    <section></section>
+    <div class="loading-screen-top"></div>
   </body>
 </html>
