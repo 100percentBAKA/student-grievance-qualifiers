@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/student_grievance
-    username: root
-    password: Mohith@4124
+    url: jdbc:mysql://localhost:3306/db_name
+    username: your-username
+    password: your-password
 
   jpa:
     show-sql: true
@@ -19,7 +19,7 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: this.is.mohith4124@gmail.com
+    username: your-email
     password: xlnvzgyfmopdobgz
     properties:
       mail:
